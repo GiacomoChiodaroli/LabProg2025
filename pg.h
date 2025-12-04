@@ -1,4 +1,4 @@
-
+#include "Mappa.h"
 #ifndef PG_H
 #define PG_H
 
@@ -9,10 +9,10 @@ private:
     int x;
     int y;
 public:
-    void move(int x, int y) {};
-    int getX() const {};
-    int getY() const {};
-    void draw() {};
+    void move(int x, int y);
+    int getX();
+    int getY();
+    void draw();
 };
 
 
