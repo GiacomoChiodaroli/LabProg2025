@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 int main()
 {
     sf::RectangleShape rect({30.f, 40.f});
-    float offsetX, offsetY;
+    float offsetX=0, offsetY=0;
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(60);
-    rect.move({100.f,100.f});
+    rect.setPosition({0.f,0.f});
     while (window.isOpen())
     {
 
@@ -19,28 +20,28 @@ int main()
             {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Right)
                 {
-                   if( mouseButtonPressed->position.x < rect.getPosition().x){
-                       offsetX=1;
+                   if( mouseButtonPressed->position.x < rect.getPosition().x-20){
+                       offsetX = -1;
                    }
                    else{
-                       if( mouseButtonPressed->position.x > rect.getPosition().x){
-                           offsetX=-1;
+                       if( mouseButtonPressed->position.x > rect.getPosition().x+20){
+                           offsetX = 1;
                        }else{
-                           if( mouseButtonPressed->position.x == rect.getPosition().x){
-                               offsetX=0;
+                           if( mouseButtonPressed->position.x <= rect.getPosition().x+20 and mouseButtonPressed->position.x >= rect.getPosition().x-20){
+                               offsetX = 0;
                            }
                        }
 
                    }
-                    if( mouseButtonPressed->position.y < rect.getPosition().y){
-                        offsetY=1;
+                    if( mouseButtonPressed->position.y < rect.getPosition().y-20){
+                        offsetY = -1;
                     }
                     else{
-                        if( mouseButtonPressed->position.y > rect.getPosition().y){
-                            offsetY=-1;
+                        if( mouseButtonPressed->position.y > rect.getPosition().y+20){
+                            offsetY = 1;
                         }else{
-                            if( mouseButtonPressed->position.y == rect.getPosition().y){
-                                offsetY=0;
+                            if( mouseButtonPressed->position.y <= rect.getPosition().y+20 and mouseButtonPressed->position.y >= rect.getPosition().y-20){
+                                offsetY = 0;
                             }
                         }
 
