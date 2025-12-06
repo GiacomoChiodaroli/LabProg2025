@@ -8,9 +8,7 @@ class node {
 private:
     bool walkable;
 public:
-    explicit node(bool walkable)
-        : walkable(walkable) {
-    }
+    explicit node(bool walkable);
 
     ~node() = default;
 };

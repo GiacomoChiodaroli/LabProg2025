@@ -14,8 +14,7 @@ private:
     int dimension;
     map<int, node> myMap;
 public:
-    Mappa(int width, int height) ;
-    void draw(sf::RenderWindow window, map<int, node> myMap);
+    Mappa(int width, int height);
     ~Mappa() = default;
 };
 
