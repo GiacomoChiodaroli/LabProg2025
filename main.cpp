@@ -1,12 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "pg.h"
 #include <iostream>
+//mappa 32x18, 60px per cell
 int main()
 {
     pg player(100.f,200.f);
 
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(144);
     float mouseX, mouseY;
     bool mousepressed=false;
 
