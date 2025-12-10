@@ -1,13 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "pg.h"
+#include "Mappa.h"
 #include <iostream>
 //mappa 32x18, 60px per cell
 int main()
 {
     pg player(100.f,200.f);
-
+    Mappa map;
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
-    window.setFramerateLimit(144);
+    window.setFramerateLimit(240);
     float mouseX, mouseY;
     bool mousepressed=false;
 
@@ -33,7 +34,9 @@ int main()
         if (mousepressed) {
             player.MoveDirection(mouseX, mouseY);
         }
+
         window.clear();
+        map.drawMap( window);
         window.draw(player.character);
         window.display();
     }

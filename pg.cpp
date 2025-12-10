@@ -3,9 +3,9 @@
 
 
 pg::pg(float x, float y) {
-    character.setRadius(15.f);
-    character.setPointCount(2*15.f*3);
-    character.setFillColor({89, 255, 205});
+    character.setRadius(20.f);
+    character.setPointCount(2*20.f*3);
+    character.setFillColor({89, 205, 205});
     character.setPosition({x, y});
 }
 
