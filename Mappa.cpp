@@ -7,11 +7,19 @@ Mappa::Mappa(): myMap{} {
             myMap[i][j] = true;
         }
     }
+    for (int i = 0; i < 32; i=i+4) {
+        for (int j = 0; j < 18; j=j+2) {
+            myMap[i][j] = false;
+        }
+    }
+
 } ;
 
 void Mappa::drawMap(sf::RenderWindow &window) {
     sf::CircleShape square(30.f*1.41, 4);
     square.setRotation(sf::degrees(45));
+    square.setOutlineColor(sf::Color::Black);
+    square.setOutlineThickness(4.f);
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
             if (myMap[i][j]) {

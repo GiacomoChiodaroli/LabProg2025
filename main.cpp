@@ -1,15 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "pg.h"
 #include "Mappa.h"
+#include <math.h>
 #include <iostream>
-//mappa 32x18, 60px per cell
 int main()
 {
-    pg player(100.f,200.f);
+    pg player(8.f,8.f);
     Mappa map;
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(240);
-    float mouseX, mouseY;
+    int mouseX, mouseY;
+    int characterX, characterY;
     bool mousepressed=false;
 
     while (window.isOpen())
@@ -24,8 +25,8 @@ int main()
             if (const auto* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>())
             {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
-                    mouseX=mouseButtonPressed->position.x;
-                    mouseY=mouseButtonPressed->position.y;
+                    mouseX=floor(mouseButtonPressed->position.x/60);
+                    mouseY=floor(mouseButtonPressed->position.y/60);
                     mousepressed=true;
                 }
 
