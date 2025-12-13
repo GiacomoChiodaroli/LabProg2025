@@ -7,7 +7,7 @@
 #include <iostream>
 #include "findpath.cpp"
 
-// riadattare le righ 139-158 in findpath.cpp per usare la mappa creata dalla classe
+// riadattare le righ 139-158, e 169 in findpath.cpp per usare la mappa creata dalla classe
 
 
 
@@ -30,7 +30,11 @@ int main() {
     pg player(randX*60.f,randY*60.f);
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(240);
-
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            world_map[i*j]= map.getValue(i,j);
+        }
+    }
 
     while (window.isOpen())
     {
@@ -52,7 +56,7 @@ int main() {
                     nodeStart.x = player.getX();
                     nodeStart.y = player.getY();
                     astarsearch.SetStartAndGoalStates(nodeStart, nodeEnd);
-                   /* do {
+                   do {
                         SearchState = astarsearch.SearchStep();
 
                         SearchSteps++;
@@ -90,14 +94,14 @@ int main() {
                         cout << "Closed list has " << len << " nodes\n";
 #endif
 
-                    } while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);*/
+                    } while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
                 }
 
             }
         }
         if (mousepressed) {
             player.MoveDirection(mouseX, mouseY);
-            /*if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
+            if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
                 cout << "Search found goal state\n";
 
                 MapSearchNode* node = astarsearch.GetSolutionStart();
@@ -130,7 +134,7 @@ int main() {
 
             // Display the number of loops the search went through
             cout << "SearchSteps : " << SearchSteps << "\n";
-            astarsearch.EnsureMemoryFreed();*/
+            astarsearch.EnsureMemoryFreed();
         }
         }
 

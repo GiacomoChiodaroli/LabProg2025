@@ -12,7 +12,6 @@
 #include <stdio.h>
 
 #include <iostream>
-#include "Mappa.h"
 
 #include "stlastar.h"  // See header for copyright and usage information
 
@@ -24,38 +23,21 @@ using namespace std;
 // Global data
 
 // The world map
-/*
-const int MAP_WIDTH = 20;
-const int MAP_HEIGHT = 20;
 
-int world_map[MAP_WIDTH * MAP_HEIGHT] = {
+const int MAP_WIDTH = 32;
+const int MAP_HEIGHT = 18;
 
-    // 0001020304050607080910111213141516171819
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 00
-    1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1,  // 01
-    1, 9, 9, 1, 1, 9, 9, 9, 1, 9, 1, 9, 1, 9, 1, 9, 9, 9, 1, 1,  // 02
-    1, 9, 9, 1, 1, 9, 9, 9, 1, 9, 1, 9, 1, 9, 1, 9, 9, 9, 1, 1,  // 03
-    1, 9, 1, 1, 1, 1, 9, 9, 1, 9, 1, 9, 1, 1, 1, 1, 9, 9, 1, 1,  // 04
-    1, 9, 1, 1, 9, 1, 1, 1, 1, 9, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1,  // 05
-    1, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 1, 1, 1, 1, 1,  // 06
-    1, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 1,  // 07
-    1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1,  // 08
-    1, 9, 1, 9, 9, 9, 9, 9, 9, 9, 1, 1, 9, 9, 9, 9, 9, 9, 9, 1,  // 09
-    1, 9, 1, 1, 1, 1, 9, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 10
-    1, 9, 9, 9, 9, 9, 1, 9, 1, 9, 1, 9, 9, 9, 9, 9, 1, 1, 1, 1,  // 11
-    1, 9, 1, 9, 1, 9, 9, 9, 1, 9, 1, 9, 1, 9, 1, 9, 9, 9, 1, 1,  // 12
-    1, 9, 1, 9, 1, 9, 9, 9, 1, 9, 1, 9, 1, 9, 1, 9, 9, 9, 1, 1,  // 13
-    1, 9, 1, 1, 1, 1, 9, 9, 1, 9, 1, 9, 1, 1, 1, 1, 9, 9, 1, 1,  // 14
-    1, 9, 1, 1, 9, 1, 1, 1, 1, 9, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1,  // 15
-    1, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 1, 1, 1, 1, 1,  // 16
-    1, 1, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 9, 9, 9, 1, 9, 9, 9, 9,  // 17
-    1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1,  // 18
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 19
-
-};*/
+int world_map[MAP_WIDTH * MAP_HEIGHT] = {0};
 
 // map helper functions
 
+int GetMap(int x, int y) {
+    if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) {
+        return 9;
+    }
+
+    return world_map[(y * MAP_WIDTH) + x];
+}
 
 // Definitions
 
@@ -135,7 +117,7 @@ bool MapSearchNode::GetSuccessors(
     }
 
     MapSearchNode NewNode;
-/*
+
     // push each possible move except allowing the search to go backwards
 
     if ((GetMap(x - 1, y) < 9) && !((parent_x == x - 1) && (parent_y == y))) {
@@ -157,7 +139,7 @@ bool MapSearchNode::GetSuccessors(
         NewNode = MapSearchNode(x, y + 1);
         astarsearch->AddSuccessor(NewNode);
     }
-*/
+
     return true;
 }
 
@@ -170,7 +152,7 @@ float MapSearchNode::GetCost(MapSearchNode& successor) {
 }
 
 // Main
-
+/*
 int main(int argc, char* argv[]) {
     cout << "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
 
@@ -286,6 +268,6 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
-}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
