@@ -8,7 +8,12 @@ pg::pg(float x, float y) {
     character.setFillColor({0, 0, 100});
     character.setPosition({x, y});
 }
-
+float pg::getX() {
+    return character.getPosition().x;
+};
+float pg::getY() {
+    return character.getPosition().y;
+};
 
 
 void pg::MoveDirection(int x, int y) {

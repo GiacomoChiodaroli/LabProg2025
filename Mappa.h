@@ -11,13 +11,11 @@ using namespace std;
 
 class Mappa {
 private:
-
-    int width;
-    int height;
-    bool myMap [32][18];
+    int myMap [32][18];
 public:
     explicit Mappa();
     void drawMap(sf::RenderWindow &window);
+    int getValue(int x, int y);
     ~Mappa() = default;
 };
 

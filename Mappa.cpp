@@ -4,16 +4,25 @@
 Mappa::Mappa(): myMap{} {
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
-            myMap[i][j] = true;
+
+            myMap[i][j] = 1;
         }
     }
     for (int i = 0; i < 32; i=i+4) {
         for (int j = 0; j < 18; j=j+2) {
-            myMap[i][j] = false;
+
+            myMap[i][j] = 999;
         }
     }
 
-} ;
+};
+
+int Mappa::getValue(int x, int y) {
+    if (x < 0 || x >= 32 || y < 0 || y >= 18) {
+        return 999;
+    }
+    return myMap[x][y];
+}
 
 void Mappa::drawMap(sf::RenderWindow &window) {
     sf::CircleShape square(30.f*1.41, 4);
@@ -22,7 +31,7 @@ void Mappa::drawMap(sf::RenderWindow &window) {
     square.setOutlineThickness(4.f);
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
-            if (myMap[i][j]) {
+            if (myMap[i][j]==1) {
                 square.setFillColor({120,120,120});
             } else {
                 square.setFillColor(sf::Color::Black);

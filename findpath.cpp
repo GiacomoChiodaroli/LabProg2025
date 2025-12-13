@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include <iostream>
+#include "Mappa.h"
 
 #include "stlastar.h"  // See header for copyright and usage information
 
@@ -23,7 +24,7 @@ using namespace std;
 // Global data
 
 // The world map
-
+/*
 const int MAP_WIDTH = 20;
 const int MAP_HEIGHT = 20;
 
@@ -51,17 +52,10 @@ int world_map[MAP_WIDTH * MAP_HEIGHT] = {
     1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1,  // 18
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 19
 
-};
+};*/
 
 // map helper functions
 
-int GetMap(int x, int y) {
-    if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) {
-        return 9;
-    }
-
-    return world_map[(y * MAP_WIDTH) + x];
-}
 
 // Definitions
 
@@ -141,7 +135,7 @@ bool MapSearchNode::GetSuccessors(
     }
 
     MapSearchNode NewNode;
-
+/*
     // push each possible move except allowing the search to go backwards
 
     if ((GetMap(x - 1, y) < 9) && !((parent_x == x - 1) && (parent_y == y))) {
@@ -163,7 +157,7 @@ bool MapSearchNode::GetSuccessors(
         NewNode = MapSearchNode(x, y + 1);
         astarsearch->AddSuccessor(NewNode);
     }
-
+*/
     return true;
 }
 
@@ -177,7 +171,7 @@ float MapSearchNode::GetCost(MapSearchNode& successor) {
 
 // Main
 
-/*int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
     cout << "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
 
     // Our sample problem defines the world as a 2d array representing a terrain
@@ -293,5 +287,5 @@ float MapSearchNode::GetCost(MapSearchNode& successor) {
 
     return 0;
 }
-*/
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
