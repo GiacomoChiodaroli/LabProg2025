@@ -5,21 +5,15 @@
 #include <ctime>
 #include <math.h>
 #include <iostream>
-#include "findpath.cpp"
-
-// riadattare le righ 139-158, e 169 in findpath.cpp per usare la mappa creata dalla classe
-
-
+#include "findpath.h"
 
 int main() {
-    int mouseX, mouseY;
-    int characterX, characterY;
+    int mouseX=0, mouseY=0;
     bool mousepressed=false;
     srand(time(0));
     int randX=rand() % 32, randY=rand() % 18;
     Mappa map;
-    MapSearchNode nodeStart;
-    MapSearchNode nodeEnd;
+
     AStarSearch<MapSearchNode> astarsearch;
     unsigned int SearchState;
     unsigned int SearchSteps = 0;
@@ -27,26 +21,24 @@ int main() {
         randX=rand() % 32;
         randY=rand() % 18;
     }
+
     pg player(randX*60.f,randY*60.f);
+    MapSearchNode nodeStart;
+    MapSearchNode nodeEnd;
+    nodeStart.x = player.getX();
+    nodeStart.y = player.getY();
+    nodeEnd.x = mouseX;
+    nodeEnd.y = mouseY;
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(240);
-    for (int i = 0; i < 32; i++) {
-        for (int j = 0; j < 18; j++) {
-            world_map[i*j]= map.getValue(i,j);
-        }
-    }
-
-    while (window.isOpen())
-    {
-
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
+    MapSearchNode::defineMap(map);
+    while (window.isOpen()) {
+        while (const std::optional event = window.pollEvent()){
+            if (event->is<sf::Event::Closed>()){
                 window.close();
+                astarsearch.EnsureMemoryFreed();
             }
-            if (const auto* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>())
-            {
+            if (const auto* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>()){
                 if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
                     mouseX=floor(mouseButtonPressed->position.x/60);
                     mouseY=floor(mouseButtonPressed->position.y/60);
@@ -56,7 +48,7 @@ int main() {
                     nodeStart.x = player.getX();
                     nodeStart.y = player.getY();
                     astarsearch.SetStartAndGoalStates(nodeStart, nodeEnd);
-                   do {
+                    do {
                         SearchState = astarsearch.SearchStep();
 
                         SearchSteps++;
@@ -95,54 +87,54 @@ int main() {
 #endif
 
                     } while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
+                    if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
+                        cout << "Search found goal state\n";
+
+                        MapSearchNode* node = astarsearch.GetSolutionStart();
+
+#if DISPLAY_SOLUTION
+                        cout << "Displaying solution\n";
+#endif
+                        int steps = 0;
+
+                        node->PrintNodeInfo();
+                        for (;;) {
+                            node = astarsearch.GetSolutionNext();
+
+                            if (!node) {
+                                break;
+                            }
+
+                            node->PrintNodeInfo();
+                            steps++;
+                        };
+
+                        cout << "Solution steps " << steps << endl;
+
+                        // Once you're done with the solution you can free the nodes up
+                        astarsearch.FreeSolutionNodes();
+
+                    } else if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_FAILED) {
+                        cout << "Search terminated. Did not find goal state\n";
+                    }
+
+                    // Display the number of loops the search went through
+                    cout << "SearchSteps : " << SearchSteps << "\n";
+
                 }
 
             }
         }
         if (mousepressed) {
             player.MoveDirection(mouseX, mouseY);
-            if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
-                cout << "Search found goal state\n";
-
-                MapSearchNode* node = astarsearch.GetSolutionStart();
-
-#if DISPLAY_SOLUTION
-                cout << "Displaying solution\n";
-#endif
-                int steps = 0;
-
-                node->PrintNodeInfo();
-                for (;;) {
-                    node = astarsearch.GetSolutionNext();
-
-                    if (!node) {
-                        break;
-                    }
-
-                    node->PrintNodeInfo();
-                    steps++;
-                };
-
-                cout << "Solution steps " << steps << endl;
-
-                // Once you're done with the solution you can free the nodes up
-                astarsearch.FreeSolutionNodes();
-
-            } else if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_FAILED) {
-                cout << "Search terminated. Did not find goal state\n";
-            }
-
-            // Display the number of loops the search went through
-            cout << "SearchSteps : " << SearchSteps << "\n";
-            astarsearch.EnsureMemoryFreed();
-        }
         }
 
-        window.clear();
-        map.drawMap( window);
-        window.draw(player.character);
-        window.display();
+
+            window.clear();
+            map.drawMap( window);
+            window.draw(player.character);
+            window.display();
+        }
     }
-
 
 

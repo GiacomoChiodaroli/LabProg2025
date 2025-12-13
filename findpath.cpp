@@ -7,14 +7,8 @@
 // This shows how to do shortest path finding using A*
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#include <math.h>
-#include <stdio.h>
-
-#include <iostream>
-
-#include "stlastar.h"  // See header for copyright and usage information
-
+#include "findpath.h"
+#include "Mappa.h"
 using namespace std;
 
 #define DEBUG_LISTS 0
@@ -22,12 +16,18 @@ using namespace std;
 
 // Global data
 
-// The world map
+
 
 const int MAP_WIDTH = 32;
 const int MAP_HEIGHT = 18;
-
 int world_map[MAP_WIDTH * MAP_HEIGHT] = {0};
+void MapSearchNode::defineMap(Mappa map) {
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            world_map[i*j]= map.getValue(i,j);
+        }
+    }
+}
 
 // map helper functions
 
@@ -41,28 +41,7 @@ int GetMap(int x, int y) {
 
 // Definitions
 
-class MapSearchNode {
-   public:
-    int x;  // the (x,y) positions of the node
-    int y;
 
-    MapSearchNode() {
-        x = y = 0;
-    }
-    MapSearchNode(int px, int py) {
-        x = px;
-        y = py;
-    }
-
-    float GoalDistanceEstimate(MapSearchNode& nodeGoal);
-    bool IsGoal(MapSearchNode& nodeGoal);
-    bool GetSuccessors(AStarSearch<MapSearchNode>* astarsearch, MapSearchNode* parent_node);
-    float GetCost(MapSearchNode& successor);
-    bool IsSameState(MapSearchNode& rhs);
-    size_t Hash();
-
-    void PrintNodeInfo();
-};
 
 bool MapSearchNode::IsSameState(MapSearchNode& rhs) {
     // same state in a maze search is simply when (x,y) are the same
