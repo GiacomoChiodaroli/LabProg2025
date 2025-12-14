@@ -13,7 +13,7 @@ int main() {
     srand(time(0));
     int randX=rand() % 32, randY=rand() % 18;
     Mappa map;
-
+    int ciao=0;
     AStarSearch<MapSearchNode> astarsearch;
     unsigned int SearchState;
     unsigned int SearchSteps = 0;
