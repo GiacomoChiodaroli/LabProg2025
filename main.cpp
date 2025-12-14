@@ -9,7 +9,7 @@
 
 int main() {
     int mouseX=0, mouseY=0;
-    bool mousepressed=false;
+    bool canmove=false;
     srand(time(0));
     int randX=rand() % 32, randY=rand() % 18;
     Mappa map;
@@ -21,10 +21,11 @@ int main() {
         randX=rand() % 32;
         randY=rand() % 18;
     }
-
+//
     pg player(randX*60.f,randY*60.f);
     MapSearchNode nodeStart;
     MapSearchNode nodeEnd;
+    MapSearchNode* node;
     nodeStart.x = player.getX();
     nodeStart.y = player.getY();
     nodeEnd.x = mouseX;
@@ -42,12 +43,11 @@ int main() {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
                     mouseX=floor(mouseButtonPressed->position.x/60);
                     mouseY=floor(mouseButtonPressed->position.y/60);
-                    mousepressed=true;
                     nodeEnd.x = mouseX;
                     nodeEnd.y = mouseY;
-                    nodeStart.x = player.getX();
-                    nodeStart.y = player.getY();
-                    astarsearch.SetStartAndGoalStates(nodeStart, nodeEnd);
+                    nodeStart.x = floor(player.getX()/60);
+                    nodeStart.y = floor(player.getY()/60);
+                    astarsearch.SetStartAndGoalStates(nodeStart,nodeEnd);
                     do {
                         SearchState = astarsearch.SearchStep();
 
@@ -88,9 +88,10 @@ int main() {
 
                     } while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
                     if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
+                        canmove = true;
                         cout << "Search found goal state\n";
 
-                        MapSearchNode* node = astarsearch.GetSolutionStart();
+                        node = astarsearch.GetSolutionStart();
 
 #if DISPLAY_SOLUTION
                         cout << "Displaying solution\n";
@@ -110,11 +111,14 @@ int main() {
                         };
 
                         cout << "Solution steps " << steps << endl;
+                        steps = 0;
+                        node = astarsearch.GetSolutionStart();
 
                         // Once you're done with the solution you can free the nodes up
-                        astarsearch.FreeSolutionNodes();
+                        //astarsearch.FreeSolutionNodes();
 
                     } else if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_FAILED) {
+                        canmove = false;
                         cout << "Search terminated. Did not find goal state\n";
                     }
 
@@ -125,8 +129,15 @@ int main() {
 
             }
         }
-        if (mousepressed) {
-            player.MoveDirection(mouseX, mouseY);
+        if (canmove) {
+            player.MoveDirection(node->x, node->y);
+            if (node->x*60+8==player.getX() && node->y*60+8==player.getY()) {
+                node = astarsearch.GetSolutionNext();
+                if (!node) {
+                    astarsearch.FreeSolutionNodes();
+                    canmove = false;
+                }
+            }
         }
 
 

@@ -24,7 +24,7 @@ int world_map[MAP_WIDTH * MAP_HEIGHT] = {0};
 void MapSearchNode::defineMap(Mappa map) {
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
-            world_map[i*j]= map.getValue(i,j);
+            world_map[j*MAP_WIDTH+i]= map.getValue(i,j);
         }
     }
 }

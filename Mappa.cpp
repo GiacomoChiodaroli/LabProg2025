@@ -14,6 +14,9 @@ Mappa::Mappa(): myMap{} {
             myMap[i][j] = 999;
         }
     }
+    for (int j = 1; j < 9; j=j+2) {
+        myMap[4][j] = 999;
+    }
 
 };
 
