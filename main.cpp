@@ -20,7 +20,6 @@ int main() {
         randX=rand() % 32;
         randY=rand() % 18;
     }
-//
     pg player(randX*60.f,randY*60.f);
     MapSearchNode nodeStart;
     MapSearchNode nodeEnd;
@@ -39,9 +38,10 @@ int main() {
                 astarsearch.EnsureMemoryFreed();
             }
             if (const auto* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>()){
-                if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
+                if (mouseButtonPressed->button == sf::Mouse::Button::Right && map.getValue(floor(mouseButtonPressed->position.x/60),floor(mouseButtonPressed->position.y/60))!=999) {
                     mouseX=floor(mouseButtonPressed->position.x/60);
                     mouseY=floor(mouseButtonPressed->position.y/60);
+                    astarsearch.FreeSolutionNodes();
                     nodeEnd.x = mouseX;
                     nodeEnd.y = mouseY;
                     nodeStart.x = floor(player.getX()/60);
