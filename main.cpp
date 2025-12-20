@@ -1,11 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "pg.h"
 #include "Mappa.h"
+#include "findpath.h"
 #include <cstdlib>
 #include <ctime>
 #include <math.h>
 #include <iostream>
-#include "findpath.h"
+#include <vector>
+//file note per controllare i metodi necessari
 
 int main() {
     int mouseX=0, mouseY=0;
@@ -16,6 +18,7 @@ int main() {
     AStarSearch<MapSearchNode> astarsearch;
     unsigned int SearchState;
     unsigned int SearchSteps = 0;
+    std::vector<sf::Vector2i> path;
     while (map.getValue(randX,randY)==999) {
         randX=rand() % 32;
         randY=rand() % 18;
@@ -46,8 +49,7 @@ int main() {
                     nodeEnd.y = mouseY;
                     nodeStart.x = floor(player.getX()/60);
                     nodeStart.y = floor(player.getY()/60);
-                    astarsearch.SetStartAndGoalStates(nodeStart,nodeEnd);
-                    do {
+                   do {
                         SearchState = astarsearch.SearchStep();
 
                         SearchSteps++;
@@ -128,13 +130,17 @@ int main() {
 
             }
         }
-        if (canmove) {
+        if (canmove ) {//&& !path.empty()
             player.MoveDirection(node->x, node->y);
             if (node->x*60+8==player.getX() && node->y*60+8==player.getY()) {
                 node = astarsearch.GetSolutionNext();
                 if (!node) {
                     astarsearch.FreeSolutionNodes();
                     canmove = false;
+                    /*if (path.empty()) {
+                   canmove = false;
+                }
+*/
                 }
             }
         }
@@ -146,5 +152,4 @@ int main() {
             window.display();
         }
     }
-
 

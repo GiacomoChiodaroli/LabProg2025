@@ -1,6 +1,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <vector>
 
 #include <iostream>
 #include "Mappa.h"
@@ -29,6 +30,7 @@ public:
     bool IsSameState(MapSearchNode& rhs);
     size_t Hash();
     void PrintNodeInfo();
+    //int pathsearch( MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path);
 };
 
 #endif //FINDPATH_H

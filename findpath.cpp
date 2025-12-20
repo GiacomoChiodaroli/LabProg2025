@@ -130,11 +130,8 @@ float MapSearchNode::GetCost(MapSearchNode& successor) {
     return (float)GetMap(x, y);
 }
 
-// Main
 /*
-int main(int argc, char* argv[]) {
-    cout << "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
-
+int MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path) {
     // Our sample problem defines the world as a 2d array representing a terrain
     // Each element contains an integer from 0 to 5 which indicates the cost
     // of travel across the terrain. Zero means the least possible difficulty
@@ -142,7 +139,7 @@ int main(int argc, char* argv[]) {
     // most difficult. 9 indicates that we cannot pass.
 
     // Create an instance of the search class...
-
+    path.clear();
     AStarSearch<MapSearchNode> astarsearch;
 
     unsigned int SearchCount = 0;
@@ -150,17 +147,6 @@ int main(int argc, char* argv[]) {
     const unsigned int NumSearches = 1;
 
     while (SearchCount < NumSearches) {
-        // Create a start state
-        MapSearchNode nodeStart;
-        nodeStart.x = rand() % MAP_WIDTH;
-        nodeStart.y = rand() % MAP_HEIGHT;
-
-        // Define the goal state
-        MapSearchNode nodeEnd;
-        nodeEnd.x = rand() % MAP_WIDTH;
-        nodeEnd.y = rand() % MAP_HEIGHT;
-
-        // Set Start and goal states
 
         astarsearch.SetStartAndGoalStates(nodeStart, nodeEnd);
 
@@ -220,11 +206,10 @@ int main(int argc, char* argv[]) {
             node->PrintNodeInfo();
             for (;;) {
                 node = astarsearch.GetSolutionNext();
-
+                path.push_back(sf::Vector2i(node->x, node->y));
                 if (!node) {
                     break;
                 }
-
                 node->PrintNodeInfo();
                 steps++;
             };
@@ -248,5 +233,3 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }*/
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
