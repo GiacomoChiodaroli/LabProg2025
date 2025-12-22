@@ -30,7 +30,7 @@ public:
     bool IsSameState(MapSearchNode& rhs);
     size_t Hash();
     void PrintNodeInfo();
-    //int pathsearch( MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path);
+    static bool pathsearch( MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path);
 };
 
 #endif //FINDPATH_H

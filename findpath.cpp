@@ -130,8 +130,8 @@ float MapSearchNode::GetCost(MapSearchNode& successor) {
     return (float)GetMap(x, y);
 }
 
-/*
-int MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path) {
+
+bool MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path) {
     // Our sample problem defines the world as a 2d array representing a terrain
     // Each element contains an integer from 0 to 5 which indicates the cost
     // of travel across the terrain. Zero means the least possible difficulty
@@ -141,6 +141,7 @@ int MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, st
     // Create an instance of the search class...
     path.clear();
     AStarSearch<MapSearchNode> astarsearch;
+    bool succed=false;
 
     unsigned int SearchCount = 0;
 
@@ -195,7 +196,7 @@ int MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, st
 
         if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
             cout << "Search found goal state\n";
-
+            succed = true;
             MapSearchNode* node = astarsearch.GetSolutionStart();
 
 #if DISPLAY_SOLUTION
@@ -231,5 +232,5 @@ int MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, st
         astarsearch.EnsureMemoryFreed();
     }
 
-    return 0;
-}*/
+    return succed;
+}
