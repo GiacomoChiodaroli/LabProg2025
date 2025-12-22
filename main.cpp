@@ -46,39 +46,21 @@ int main() {
                     nodeStart.y = floor(player.getY()/60);
                     cout << "ciao";
                     canmove = MapSearchNode::pathsearch(nodeStart, nodeEnd, path);
-
-                    int i=0;
-                    while (path.empty() == false) {
-                        i++;
-                        sf::Vector2i target = path.front();
-                        cout<<i<<" "<<target.x<<" "<<target.y<<endl;
-
-                    }
                 }
 
             }
         }
-        /*if (canmove && !path.empty()) {
-            // Prendiamo il prossimo obiettivo dalla lista
+        if (canmove) {
             sf::Vector2i target = path.front();
-
             player.MoveDirection(target.x, target.y);
-
-            // Controllo se siamo arrivati al centro del tile (con tolleranza)
-            float px = player.getX();
-            float py = player.getY();
-            float targetPx = target.x * 60 + 8; // +8 è il tuo offset originale
-            float targetPy = target.y * 60 + 8;
-
-            if (abs(targetPx - px) < 2.0f && abs(targetPy - py) < 2.0f) {
-                // Rimuoviamo il passo appena completato
-
-
+            if (target.x*60+8==player.getX() && target.y*60+8==player.getY()) {
+                path.erase(path.begin());
                 if (path.empty()) {
                     canmove = false;
                 }
+
             }
-        }*/
+        }
 
 
             window.clear();

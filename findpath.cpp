@@ -207,10 +207,10 @@ bool MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, s
             node->PrintNodeInfo();
             for (;;) {
                 node = astarsearch.GetSolutionNext();
-                path.push_back(sf::Vector2i(node->x, node->y));
                 if (!node) {
                     break;
                 }
+                path.push_back(sf::Vector2i(node->x, node->y));
                 node->PrintNodeInfo();
                 steps++;
             };
