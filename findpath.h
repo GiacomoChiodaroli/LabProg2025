@@ -7,6 +7,7 @@
 #include "Mappa.h"
 
 #include "stlastar.h"  // See header for copyright and usage information
+#include "SFML/System/Vector2.hpp"
 
 #ifndef FINDPATH_H
 #define FINDPATH_H

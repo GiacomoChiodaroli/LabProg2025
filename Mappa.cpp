@@ -1,6 +1,5 @@
-
 #include "Mappa.h"
-#include "node.h"
+
 Mappa::Mappa(): myMap{} {
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
@@ -17,7 +16,6 @@ Mappa::Mappa(): myMap{} {
     for (int j = 1; j < 9; j=j+2) {
         myMap[4][j] = 999;
     }
-
 };
 
 int Mappa::getValue(int x, int y) {

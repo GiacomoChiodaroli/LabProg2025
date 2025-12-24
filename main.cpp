@@ -44,7 +44,6 @@ int main() {
                     nodeEnd.y = mouseY;
                     nodeStart.x = floor(player.getX()/60);
                     nodeStart.y = floor(player.getY()/60);
-                    cout << "ciao";
                     canmove = MapSearchNode::pathsearch(nodeStart, nodeEnd, path);
                 }
 

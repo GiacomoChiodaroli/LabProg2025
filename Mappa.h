@@ -1,6 +1,4 @@
 
-#include "node.h"
-#include <map>
 #include <SFML/Graphics.hpp>
 
 using namespace std;
