@@ -30,6 +30,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 target_link_libraries(tests
         gtest
         gtest_main
+        SFML::Graphics
 )
 target_link_libraries(main PRIVATE SFML::Graphics)
 
