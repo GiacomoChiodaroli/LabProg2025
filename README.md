@@ -1,5 +1,8 @@
 classi per movimento di un personaggio in un gioco 2D, implementazione grafica tramite sfml.
-repository creata tramite la funzione template di github.
+repository creata tramite la funzione template di github.
+la ricerca del percorso avviene tramite algoritmo A* (STL A* Search implementation (C)2001 Justin Heyes-Jones), il 
+codice ci quest'implementazione è solo stato modificato per poter funzionare sul programma e sono stati aggiunti due 
+metodi statici, usati per il corretto passaggio della mappa e per evidenziare il percorso trovato
 
 
 test eseguiti: 
@@ -10,6 +13,4 @@ test eseguiti:
     -   ricerca percorso: 
             - ricerca percorso da casella valida a valida con successo;
             - ricerca percorso da casella valida a casella non valida fallisce;
-            - da fare: controllo su eventuali memory leak;
-
-    
+            - controllo su eventuali memory leak;
