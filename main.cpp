@@ -57,10 +57,12 @@ int main() {
 
             }
         }
-            window.clear();
-            map.drawMap( window);
-            window.draw(player.character);
-            window.display();
-        }
+        window.clear();
+        map.drawMap(window);
+        MapSearchNode::drawPath(path, window);
+        window.draw(player.character);
+
+        window.display();
     }
+}
 

@@ -129,7 +129,20 @@ bool MapSearchNode::GetSuccessors(
 float MapSearchNode::GetCost(MapSearchNode& successor) {
     return (float)GetMap(x, y);
 }
-
+void MapSearchNode:: drawPath(std::vector<sf::Vector2i>& path,sf::RenderWindow &window) {
+    int x,y;
+    sf::CircleShape square(20.f*1.41, 4);
+    square.setRotation(sf::degrees(45));
+    square.setOutlineColor(sf::Color::Black);
+    square.setOutlineThickness(4.f);
+    for (int i = 0; i < path.size(); i++) {
+        x=path[i].x;
+        y=path[i].y;
+        square.setFillColor({200,200,200});
+        square.setPosition({x* 60.f+28, y* 60.f-12});
+        window.draw(square);
+    }
+}
 
 bool MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path) {
     // Our sample problem defines the world as a 2d array representing a terrain

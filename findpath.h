@@ -24,6 +24,7 @@ public:
         y = py;
     }
     static void defineMap(Mappa map);
+    static void drawPath(std::vector<sf::Vector2i>& path,sf::RenderWindow &window);
     float GoalDistanceEstimate(MapSearchNode& nodeGoal);
     bool IsGoal(MapSearchNode& nodeGoal);
     bool GetSuccessors(AStarSearch<MapSearchNode>* astarsearch, MapSearchNode* parent_node);
@@ -32,6 +33,7 @@ public:
     size_t Hash();
     void PrintNodeInfo();
     static bool pathsearch( MapSearchNode nodeStart, MapSearchNode nodeEnd, std::vector<sf::Vector2i>& path);
+
 };
 
 #endif //FINDPATH_H
