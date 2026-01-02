@@ -222,6 +222,7 @@ bool MapSearchNode::pathsearch(MapSearchNode nodeStart, MapSearchNode nodeEnd, s
 
         } else if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_FAILED) {
             cout << "Search terminated. Did not find goal state\n";
+            succed = false;
         }
 
         // Display the number of loops the search went through

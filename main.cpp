@@ -5,9 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <math.h>
-#include <iostream>
 #include <vector>
-//file note per controllare i metodi necessari
 
 int main() {
     int mouseX=0, mouseY=0;
@@ -20,10 +18,9 @@ int main() {
         randX=rand() % 32;
         randY=rand() % 18;
     }
-    pg player(randX*60.f,randY*60.f);
+    pg player(randX*60.f+8,randY*60.f+8);
     MapSearchNode nodeStart;
     MapSearchNode nodeEnd;
-    //MapSearchNode* node;
     nodeStart.x = player.getX();
     nodeStart.y = player.getY();
     nodeEnd.x = mouseX;
@@ -60,8 +57,6 @@ int main() {
 
             }
         }
-
-
             window.clear();
             map.drawMap( window);
             window.draw(player.character);

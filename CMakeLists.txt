@@ -15,28 +15,51 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
+set(GTEST_DIR "${CMAKE_SOURCE_DIR}/googletest-main")
+if(EXISTS "${GTEST_DIR}/CMakeLists.txt")
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    add_subdirectory("${GTEST_DIR}" "${CMAKE_BINARY_DIR}/googletest-build" EXCLUDE_FROM_ALL)
+    message(STATUS "fatto: collegato gtest")
+else()
+    message(FATAL_ERROR "ERRORE CRITICO: Cartella GoogleTest non trovata in: ${GTEST_DIR}")
+endif()
+
+
 add_executable(main main.cpp
         Mappa.cpp
         pg.cpp
         findpath.cpp)
+
 add_executable(tests
-       tests/test_main.cpp
+        tests/test_main.cpp
+        Mappa.cpp
+        pg.cpp
+        findpath.cpp
+        googletest-main/googletest/include/gtest/gtest.h
+)
+target_link_libraries(main PRIVATE SFML::Graphics)
+
+
+
+target_include_directories(tests PRIVATE
+        "${GTEST_DIR}/googletest/include"
+        "${GTEST_DIR}/googlemock/include"
+        "${CMAKE_SOURCE_DIR}"
 )
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/googletest-main)
-include_directories(${CMAKE_SOURCE_DIR}/googletest-main/googletest/include)
-include_directories(${CMAKE_SOURCE_DIR})
-
 target_link_libraries(tests
+        PRIVATE
         gtest
         gtest_main
         SFML::Graphics
 )
-target_link_libraries(main PRIVATE SFML::Graphics)
+
+
 
 enable_testing()
 add_test(NAME GameTest COMMAND tests)
 
 target_compile_features(main PRIVATE cxx_std_17)
+target_compile_features(tests PRIVATE cxx_std_17)
 
 #librerie e executable usate e librerie per i test sono separate
