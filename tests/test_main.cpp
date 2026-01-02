@@ -33,6 +33,7 @@ TEST(findpathTest, RicercaPercorso) {
     nodeEnd.x=4;
     nodeEnd.y=4;
     EXPECT_FALSE(MapSearchNode::pathsearch(nodeStart, nodeEnd, path));
+    EXPECT_TRUE(path.empty())<<"path non è vuoto";
 }
 
 int main(int argc, char **argv) {
