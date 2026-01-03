@@ -11,8 +11,9 @@ TEST(pgTest, PosizioneIniziale) {
 
 TEST(pgTest, Movimento) {
     pg g(8,8);
+    Mappa map;
     for (int i=0;i<130;i++) {
-        g.MoveDirection(1,1);
+        g.MoveDirection(1,1,map);
     }
     EXPECT_FLOAT_EQ(g.getX(), 68.f);
     EXPECT_FLOAT_EQ(g.getY(), 68.f);

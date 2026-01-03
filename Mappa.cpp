@@ -1,10 +1,12 @@
 #include "Mappa.h"
 
+
 Mappa::Mappa(): myMap{} {
+    srand(time(0));
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
 
-            myMap[i][j] = 1;
+            myMap[i][j] = rand() % 5 +1;
         }
     }
     for (int i = 0; i < 32; i=i+4) {
@@ -33,8 +35,13 @@ void Mappa::drawMap(sf::RenderWindow &window) {
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 18; j++) {
             if (myMap[i][j]==1) {
-                square.setFillColor({120,120,120});
-            } else {
+                square.setFillColor({200, 250, 200});
+            }
+            if (myMap[i][j]==2){square.setFillColor({150, 230, 150});}
+            if (myMap[i][j]==3){square.setFillColor({100, 210, 100});}
+            if (myMap[i][j]==4){square.setFillColor({60, 170, 60});}
+            if (myMap[i][j]==5){square.setFillColor({30, 130, 30});}
+            if (myMap[i][j]==999){
                 square.setFillColor(sf::Color::Black);
             }
             square.setPosition({i * 60.f+30, j * 60.f-30});

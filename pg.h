@@ -12,7 +12,7 @@ public:
     float getX();
     float getY();
     explicit pg(float x, float y);
-    void MoveDirection(int x, int y);
+    void MoveDirection(int x, int y,Mappa map);
 
 };
 

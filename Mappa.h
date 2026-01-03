@@ -1,5 +1,6 @@
 
 #include <SFML/Graphics.hpp>
+#include <ctime>
 
 using namespace std;
 #ifndef MAPPA_H

@@ -16,16 +16,16 @@ float pg::getY() {
 };
 
 
-void pg::MoveDirection(int x, int y) {
+void pg::MoveDirection(int x, int y,Mappa map) {
     int charx = character.getPosition().x-8;
     int chary = character.getPosition().y-8;
     x=x*60;
     y=y*60;
     float offsetX = 0;
     float offsetY = 0;
-    offsetX = (charx < x) ? 1 : (charx > x) ? -1 : 0;
+    offsetX = (charx < x) ? 5/map.getValue(x/60,y/60) : (charx > x) ? -5/map.getValue(x/60,y/60) : 0;
     if (offsetX==0) {
-       offsetY = (chary < y) ? 1 : (chary > y) ? -1 : 0;
+       offsetY = (chary < y) ? 5/map.getValue(x/60,y/60) : (chary > y) ? -5/map.getValue(x/60,y/60) : 0;
     }
     character.move({offsetX, offsetY});
 }

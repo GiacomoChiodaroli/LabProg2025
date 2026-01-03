@@ -26,7 +26,7 @@ int main() {
     nodeEnd.x = mouseX;
     nodeEnd.y = mouseY;
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
-    window.setFramerateLimit(240);
+    window.setFramerateLimit(75);
     MapSearchNode::defineMap(map);
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()){
@@ -48,7 +48,7 @@ int main() {
         }
         if (canmove) {
             sf::Vector2i target = path.front();
-            player.MoveDirection(target.x, target.y);
+            player.MoveDirection(target.x, target.y,map);
             if (target.x*60+8==player.getX() && target.y*60+8==player.getY()) {
                 path.erase(path.begin());
                 if (path.empty()) {
