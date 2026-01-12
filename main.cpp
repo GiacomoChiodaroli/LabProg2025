@@ -26,7 +26,7 @@ int main() {
     nodeEnd.x = mouseX;
     nodeEnd.y = mouseY;
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
-    window.setFramerateLimit(75);
+    window.setFramerateLimit(144);
     MapSearchNode::defineMap(map);
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()){
